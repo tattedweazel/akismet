@@ -1,4 +1,8 @@
-<?php namespace Kenmoini\Akismet;
+<?php
+
+namespace Kenmoini\Akismet;
+
+use Exception;
 
 /**
  * Akismet anti-comment spam service
@@ -199,7 +203,7 @@ class Akismet {
 		$response = $this->sendRequest($this->getQueryString(), $this->wordPressAPIKey . '.rest.akismet.com', '/' . $this->akismetVersion . '/comment-check');
 
 		if($response[1] == 'invalid' && !$this->isKeyValid()) {
-			throw new exception('The Wordpress API key passed to the Akismet constructor is invalid.  Please obtain a valid one from http://wordpress.com/api-keys/');
+			throw new Exception('The Wordpress API key passed to the Akismet constructor is invalid.  Please obtain a valid one from http://wordpress.com/api-keys/');
 		}
 
 		return ($response[1] == 'true');
